@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Posiciona tu Negocio en Google Maps</title>
+
+<style>
+:root {
+  --azul: #102747;
+  --azul-claro: #1674e8;
+  --amarillo: #ffc928;
+  --verde: #20bf58;
+  --blanco: #ffffff;
+  --gris: #f4f6f9;
+  --texto: #172235;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--gris);
+  color: var(--texto);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  width: 92%;
+  max-width: 1150px;
+  margin: auto;
+}
+
+/* HEADER */
+
+header {
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+
+.nav {
+  min-height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.logo span {
+  display: block;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.logo-pin {
+  font-size: 35px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.menu a {
+  font-weight: 600;
+}
+
+.menu a:hover {
+  color: var(--azul-claro);
+}
+
+.btn {
+  padding: 13px 22px;
+  border-radius: 30px;
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  transition: .2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-azul {
+  background: var(--azul-claro);
+  color: white;
+}
+
+.btn-amarillo {
+  background: var(--amarillo);
+  color: #111;
+}
+
+.btn-verde {
+  background: var(--verde);
+  color: white;
+}
+
+/* HERO */
+
+.hero {
+  background:
+    linear-gradient(90deg, rgba(8,25,48,.95), rgba(8,25,48,.72)),
+    url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=80");
+
+  background-position: center;
+  background-size: cover;
+  color: white;
+}
+
+.hero-content {
+  padding: 80px 0;
+  max-width: 850px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6vw, 68px);
+  line-height: 1.08;
+  margin-bottom: 22px;
+}
+
+.hero h1 span {
+  color: var(--amarillo);
+}
+
+.hero p {
+  font-size: clamp(17px, 2vw, 23px);
+  margin-bottom: 30px;
+  color: #e3eaf5;
+}
+
+/* RESEÑAS */
+
+.reseñas {
+  padding: 65px 0;
+  background: white;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.titulo h2 {
+  font-size: clamp(26px, 4vw, 40px);
+  color: var(--azul);
+}
+
+.titulo p {
+  color: #667085;
+  font-size: 17px;
+}
+
+.resumen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 25px 0 35px;
+}
+
+.estrellas {
+  color: #f5b800;
+  font-size: 25px;
+  letter-spacing: 3px;
+}
+
+.resumen strong {
+  font-size: 22px;
+}
+
+/* TARJETAS */
+
+.grid-reseñas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.tarjeta {
+  background: white;
+  border: 1px solid #e5e9ef;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.07);
+  transition: .2s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.1);
+}
+
+.cliente {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #2467d1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.nombre {
+  font-weight: bold;
+}
+
+.fecha {
+  color: #7a8493;
+  font-size: 13px;
+}
+
+.estrellas-tarjeta {
+  color: #f5b800;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.comentario {
+  font-size: 15px;
+}
+
+/* COMO FUNCIONA */
+
+.como {
+  padding: 65px 0;
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 35px;
+}
+
+.paso {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 5px 18px rgba(0,0,0,.06);
+}
+
+.icono {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.paso h3 {
+  color: var(--azul);
+  margin-bottom: 10px;
+}
+
+.paso p {
+  color: #687386;
+}
+
+/* CTA */
+
+.cta {
+  background: var(--azul);
+  color: white;
+  border-radius: 22px;
+  padding: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px auto 50px;
+}
+
+.cta h2 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.cta p {
+  color: #dbe5f3;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  color: #687386;
+}
+
+/* WHATSAPP FLOTANTE */
+
+.whatsapp {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: #20bf58;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.25);
+  z-index: 999;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+  .grid-reseñas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    padding: 12px 0;
+    flex-direction: column;
+  }
+
+  .menu {
+    width: 100%;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .menu a {
+    font-size: 13px;
+  }
+
+  .menu .btn {
+    padding: 10px 15px;
+  }
+
+  .hero-content {
+    padding: 50px 0;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+  .grid-reseñas {
+    grid-template-columns: 1fr;
+  }
+
+  .tarjeta {
+    padding: 20px;
+  }
+
+  .cta {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px;
+  }
+
+  .cta h2 {
+    font-size: 23px;
+  }
+
+  .reseñas,
+  .como {
+    padding: 45px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+  <div class="container nav">
+
+    <a href="#inicio" class="logo">
+      <div class="logo-pin">📍</div>
+      <div>
+        Posiciona tu Negocio
+        <span>en Google Maps</span>
+      </div>
+    </a>
+
+    <nav class="menu">
+      <a href="#inicio">Inicio</a>
+      <a href="#reseñas">Reseñas</a>
+      <a href="#como">Cómo funciona</a>
+
+      <a class="btn btn-azul"
+         href="https://wa.me/5492284690881">
+        ☎ Escribime
+      </a>
+    </nav>
+
+  </div>
+</header>
+
+<!-- PORTADA -->
+<section class="hero" id="inicio">
+  <div class="container">
+    <div class="hero-content">
+
+      <h1>
+        Hacé que tu negocio
+        <span>aparezca más arriba</span>
+        en Google Maps
+      </h1>
+
+      <p>
+        Más visibilidad. Más llamadas. Más oportunidades
+        de conseguir clientes.
+      </p>
+
+      <a href="#como" class="btn btn-amarillo">
+        ↗ Conocé más
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESEÑAS -->
+<section class="reseñas" id="reseñas">
+
+  <div class="container">
+
+    <div class="titulo">
+      <h2>Lo que dicen mis clientes</h2>
+      <p>Experiencias de personas que confiaron en mi servicio</p>
+    </div>
+
+    <div class="resumen">
+      <span class="estrellas">★★★★★</span>
+      <strong>5.0 de 5</strong>
+      <span>Más de 25 reseñas</span>
+    </div>
+
+    <div class="grid-reseñas" id="lista-reseñas">
+    </div>
+
+    <p style="text-align:center;color:#888;margin-top:25px;font-size:13px">
+      Reemplazá los testimonios de ejemplo por reseñas reales de tus clientes.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="como" id="como">
+
+  <div class="container">
+
+    <div class="titulo">
+      <h2>¿Cómo funciona?</h2>
+      <p>Un proceso sencillo para mejorar la presencia de tu negocio</p>
+    </div>
+
+    <div class="pasos">
+
+      <div class="paso">
+        <div class="icono">🔎</div>
+        <h3>Analizamos tu perfil</h3>
+        <p>
+          Revisamos tu ficha de Google y detectamos
+          oportunidades de mejora.
+        </p>
+      </div>
+
+      <div class="paso">
+        <div class="icono">🛠️</div>
+        <h3>Lo optimizamos</h3>
+        <p>
+          Mejoramos la información, categorías,
+          contenido y presentación.
+        </p>
+      </div>
+
+      <div class="paso">
+        <div class="icono">📈</div>
+        <h3>Medimos avances</h3>
+        <p>
+          Seguimos el rendimiento y trabajamos
+          para mejorar la visibilidad local.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CONTACTO -->
+<section>
+  <div class="container">
+
+    <div class="cta">
+
+      <div>
+        <h2>¿Querés llevar tu negocio al siguiente nivel?</h2>
+        <p>
+          Escribime y mejoramos juntos tu presencia en Google Maps.
+        </p>
+      </div>
+
+      <a class="btn btn-verde"
+         href="https://wa.me/5492284690881">
+        ☎ Contactame
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- PIE -->
+<footer>
+  Tu éxito en Google Maps, mi compromiso.
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a class="whatsapp"
+   href="https://wa.me/5492284690881"
+   aria-label="WhatsApp">
+  ☎
+</a>
+
+<script>
+
+/* ==================================
+   EDITÁ TUS RESEÑAS ACÁ
+   ================================== */
+const reseñas = [
+
+["Martín González","Excelente trabajo. Mi negocio ahora tiene una presencia más clara y profesional en Google.","Hace 1 año"],
+["Luciano Fernández","Muy atento y profesional. Me explicó todo de manera sencilla y clara.","Hace 1 año y 9 meses"],
+["Santiago Rodríguez","Estoy muy conforme con el servicio y la atención recibida. Lo recomiendo.","Hace 1 año y 6 meses"],
+["Facundo Martínez","Me ayudó a mejorar la información de mi negocio y a tener el perfil más completo.","Hace 4 meses"],
+["Nicolás López","Buena comunicación, cumplió con lo acordado y respondió todas mis dudas.","Hace 3 semanas"],
+["Jorge Ramírez","Un servicio serio y responsable. Se nota el cuidado en los detalles.","Hace 3 meses"],
+["Ana Fernández","La presentación de mi negocio quedó mucho mejor. Muy recomendable.","Hace 5 meses"],
+["Miguel Domínguez","Me orientó con ideas claras para mejorar mi perfil de Google.","Hace 8 meses"],
+["Sofía Herrera","Excelente trato y explicación de cada paso del trabajo.","Hace 2 semanas"],
+["Diego Castro","Muy buena atención. Me ayudó a entender cómo mostrar mejor mi negocio.","Hace 1 año y 4 meses"],
+["Paula Benítez","Trabajo prolijo y profesional. Estoy contenta con el resultado.","Hace 1 año y 5 mes"],
+["Fernando Acosta","Respondió rápido y fue muy claro desde el primer contacto.","Hace 2 años y 1 mes"],
+["Camila Torres","Me gustó la atención personalizada y las recomendaciones.","Hace 6 año"],
+["Héctor Pereyra","Servicio confiable y muy buena predisposición.","Hace 7 meses"],
+["Natalia Romero","Todo explicado con claridad y sin vueltas. Muy recomendable.","Hace 3 semanas"],
+["Andrés Molina","Me ayudó a ordenar y mejorar los datos de mi ficha.","Hace 1 mes"],
+["Florencia Silva","Muy buena experiencia, profesional y amable.","Hace 2 semana"],
+["Pablo Suárez","Cumplió con lo pactado y mantuvo buena comunicación.","Hace 10 meses"],
+["Rocío Medina","Me asesoró con paciencia y respondió todas mis consultas.","Hace 1 año y 9 meses"],
+["Martín Cabrera","Una atención excelente y un trabajo muy cuidado.","Hace 2 meses"],
+["Carolina Díaz","Recomiendo el servicio por la seriedad y el trato.","Hace 11 meses"],
+["Gustavo Morales","Muy buena predisposición para ayudar a mejorar mi negocio.","Hace 11 meses"],
+["Elena Navarro","Quedé conforme con el trabajo y con la explicación.","Hace 1 año y 1 mes"],
+["Bruno Ríos","Profesional, atento y fácil de contactar.","Hace 2 años y 2 meses"],
+["Julieta Álvarez","Una experiencia positiva. Me dio recomendaciones útiles.","Hace 2 años y 5 meses"]
+
+];
+
+
+/* GENERADOR AUTOMÁTICO DE TARJETAS */
+
+const colores = [
+  "#2563eb",
+  "#16834b",
+  "#7042a6",
+  "#d97706",
+  "#0f766e",
+  "#db4775"
+];
+
+const contenedor = document.getElementById("lista-reseñas");
+
+reseñas.forEach((reseña, indice) => {
+
+  const nombre = reseña[0];
+  const iniciales = nombre
+    .split(" ")
+    .map(p => p[0])
+    .join("")
+    .replace(".","");
+
+  const tarjeta = document.createElement("div");
+  tarjeta.className = "tarjeta";
+
+  tarjeta.innerHTML = `
+    <div class="cliente">
+
+      <div class="avatar"
+        style="background:${colores[indice % colores.length]}">
+        ${iniciales}
+      </div>
+
+      <div>
+        <div class="nombre">${nombre}</div>
+        <div class="fecha">${reseña[2]}</div>
+      </div>
+
+    </div>
+
+    <div class="estrellas-tarjeta">★★★★★</div>
+
+    <p class="comentario">${reseña[1]}</p>
+  `;
+
+  contenedor.appendChild(tarjeta);
+
+});
+
+</script>
+
+</body>
+</html>
